@@ -57,6 +57,9 @@ Counts by year
 cat filtered/fi/201[1-5]/*/*.json | egrep -A 3 '"topics"' \
     | egrep -A 1 '"id": "('"$(echo $SUBJECTS | tr ',' '|')"')"' \
     | egrep '"title"' | sort | uniq -c | sort -rn
+cat filtered/fi/201[6-8]/*/*.json | egrep -A 3 '"topics"' \
+    | egrep -A 1 '"id": "('"$(echo $SUBJECTS | tr ',' '|')"')"' \
+    | egrep '"title"' | sort | uniq -c | sort -rn
 ```
 
 (Gives 10K+ for all 10 selected subjects for 2011-2015, 2K+ for all 2016-)
