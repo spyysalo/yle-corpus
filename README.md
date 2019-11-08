@@ -104,12 +104,12 @@ Sample
 mkdir sampled
 for f in extracted/early-*; do
     b=$(basename $f .tsv); s=${b#*-}
-    shuf $f | head -n 10000 > sampled/train-$s.tsv
+    python3 fixedshuf.py $f | head -n 10000 > sampled/train-$s.tsv
 done
 for t in dev test; do
     for f in extracted/${t}-*; do
         b=$(basename $f .tsv); s=${b#$*-}
-        shuf $f | head -n 1000 > sampled/${t}-$s.tsv
+        python3 fixedshuf.py $f | head -n 1000 > sampled/$s.tsv
     done
 done
 ```
@@ -119,21 +119,22 @@ Combine, format for fasttext
 ```
 mkdir data
 for t in train dev test; do
-    cat sampled/${t}-*.tsv | shuf | cut -f 2- | perl -pe 's/^/__label__/' \
+    cat sampled/${t}-*.tsv | python3 fixedshuf.py | cut -f 2- \
+        | perl -pe 's/^/__label__/' \
         | perl -pe 's/\t/ /' > data/yle-${t}.txt
 done
 ```
 
-## Create 10% and 1% subsets of training data
+## Create subsets of training data
 
 ```
-for n in 1000 100; do
+for n in 3162 1000 316 100; do
     mkdir sampled-${n}
     for f in extracted/early-*; do
 	b=$(basename $f .tsv); s=${b#*-}
-	shuf $f | head -n $n > sampled-${n}/train-$s.tsv
+	python3 fixedshuf.py $f | head -n $n > sampled-${n}/train-$s.tsv
     done
-    cat sampled-${n}/train-*.tsv | shuf | cut -f 2- \
+    cat sampled-${n}/train-*.tsv | python3 fixedshuf.py | cut -f 2- \
         | perl -pe 's/^/__label__/; s/\t/ /' > data/yle-train-${n}.txt
 done
 ```
