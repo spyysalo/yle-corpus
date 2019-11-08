@@ -27,8 +27,8 @@ def filter_by_topics(data, fn, options):
     filtered = { 'data': [] }
     for document in data['data']:
         if 'subjects' not in document:
-            print('no subjects for {}, skipping ...'.format(document['id']),
-                  file=sys.stderr)
+            # print('no subjects for {}, skipping ...'.format(document['id']),
+            #       file=sys.stderr)
             continue
         matches = []
         for subject in document['subjects']:
