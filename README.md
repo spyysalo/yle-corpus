@@ -139,6 +139,12 @@ for n in 3162 1000 316 100; do
 done
 ```
 
+## Store checksums
+
+```
+md5sum data/*.txt > checksums.md5
+```
+
 ## Experiments
 
 Setup
