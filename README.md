@@ -57,6 +57,9 @@ Counts by year
 cat filtered/fi/201[1-5]/*/*.json | egrep -A 3 '"topics"' \
     | egrep -A 1 '"id": "('"$(echo $SUBJECTS | tr ',' '|')"')"' \
     | egrep '"title"' | sort | uniq -c | sort -rn
+cat filtered/fi/201[6-8]/*/*.json | egrep -A 3 '"topics"' \
+    | egrep -A 1 '"id": "('"$(echo $SUBJECTS | tr ',' '|')"')"' \
+    | egrep '"title"' | sort | uniq -c | sort -rn
 ```
 
 (Gives 10K+ for all 10 selected subjects for 2011-2015, 2K+ for all 2016-)
@@ -143,6 +146,24 @@ done
 
 ```
 md5sum data/*.txt > checksums.md5
+```
+
+## Create symlinks with consistent naming (for convenience)
+
+```
+mkdir data/{100,32,10,3,1}-percent
+for d in data/{100,32,10,3,1}-percent; do
+    ( 
+        cd $d;
+        ln -s ../yle-dev.txt dev.txt;
+        ln -s ../yle-test.txt test.txt
+    )
+done
+(cd data/1-percent; ln -s ../yle-train-100.txt train.txt)
+(cd data/3-percent; ln -s ../yle-train-316.txt train.txt)
+(cd data/10-percent; ln -s ../yle-train-1000.txt train.txt)
+(cd data/32-percent; ln -s ../yle-train-3162.txt train.txt)
+(cd data/100-percent; ln -s ../yle-train.txt train.txt)
 ```
 
 ## Experiments
