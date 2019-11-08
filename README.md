@@ -189,14 +189,14 @@ $FASTTEXT supervised -input data/yle-train.txt -output yle.model \
 $FASTTEXT test yle.model.bin data/yle-dev.txt
 ```
 
-Defaults, 10% training data (~16%)
+Defaults, 10% training data (~15%)
 
 ```
 $FASTTEXT supervised -input data/yle-train-1000.txt -output yle.model
 $FASTTEXT test yle.model.bin data/yle-dev.txt
 ```
 
-More epochs and subwords, 10% training data (66%)
+More epochs and subwords, 10% training data (~65%)
 
 ```
 $FASTTEXT supervised -input data/yle-train-1000.txt -output yle.model \
@@ -204,14 +204,14 @@ $FASTTEXT supervised -input data/yle-train-1000.txt -output yle.model \
 $FASTTEXT test yle.model.bin data/yle-dev.txt
 ```
 
-Defaults, 1% training data (~17%)
+Defaults, 1% training data (~18%)
 
 ```
 $FASTTEXT supervised -input data/yle-train-100.txt -output yle.model
 $FASTTEXT test yle.model.bin data/yle-dev.txt
 ```
 
-More epochs and subwords, 1% training data (45%)
+More epochs and subwords, 1% training data (~50%)
 
 ```
 $FASTTEXT supervised -input data/yle-train-100.txt -output yle.model \
