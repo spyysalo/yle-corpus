@@ -6,7 +6,18 @@ Data source: http://urn.fi/urn:nbn:fi:lb-2017070501
 
 Data license: https://korp.csc.fi/download/YLE/fi/LICENSE.txt
 
-# Processing
+# Quickstart
+
+The corpus licese does not permit redistribution. The balanced
+ten-class version can be recreated from source as follows:
+
+* Download data from http://urn.fi/urn:nbn:fi:lb-2017070501, save as `ylenews-fi-2011-2018-src.zip`
+
+* Run `BUILD-DATA.sh`
+
+(This takes a while.)
+
+# Processing details
 
 ## Download and unpack source data
 
