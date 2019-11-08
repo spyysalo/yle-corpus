@@ -16,10 +16,14 @@ def main(argv):
         lines.append(l)
     random.Random(SEED).shuffle(lines)
     for l in lines:
+        # Pipeline workarounds for https://bugs.python.org/issue24864
         try:
             print(l, end='')
-        except BrokenPipeError:
-            break    # `head` etc. are OK
+        except (BrokenPipeError, ValueError):
+            try:
+                sys.stdout.close()
+            except:
+                pass
     return 0
 
 
