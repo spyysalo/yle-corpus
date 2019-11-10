@@ -159,22 +159,33 @@ done
 md5sum data/*.txt > checksums.md5
 ```
 
+## Create truncated versions of data
+
+(Truncates lines to max 256 basic tokens, affects approx. 1/3 of examples)
+
+mkdir trunc-data
+for f in data/*.txt; do
+    python3 scripts/truncate.py 256 "$f" > trunc-data/$(basename "$f")
+done
+
 ## Create symlinks with consistent naming (for convenience)
 
 ```
-mkdir data/{100,32,10,3,1}-percent
-for d in data/{100,32,10,3,1}-percent; do
-    ( 
-        cd $d;
-        ln -s ../yle-dev.txt dev.txt;
-        ln -s ../yle-test.txt test.txt
-    )
+for s in data trunc-data; do
+    mkdir $s/{100,32,10,3,1}-percent
+    for d in $s/{100,32,10,3,1}-percent; do
+        ( 
+            cd $d;
+            ln -s ../yle-dev.txt dev.txt;
+            ln -s ../yle-test.txt test.txt
+        )
+    done
+    (cd $s/1-percent; ln -s ../yle-train-100.txt train.txt)
+    (cd $s/3-percent; ln -s ../yle-train-316.txt train.txt)
+    (cd $s/10-percent; ln -s ../yle-train-1000.txt train.txt)
+    (cd $s/32-percent; ln -s ../yle-train-3162.txt train.txt)
+    (cd $s/100-percent; ln -s ../yle-train.txt train.txt)
 done
-(cd data/1-percent; ln -s ../yle-train-100.txt train.txt)
-(cd data/3-percent; ln -s ../yle-train-316.txt train.txt)
-(cd data/10-percent; ln -s ../yle-train-1000.txt train.txt)
-(cd data/32-percent; ln -s ../yle-train-3162.txt train.txt)
-(cd data/100-percent; ln -s ../yle-train.txt train.txt)
 ```
 
 ## Experiments
