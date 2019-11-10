@@ -1,4 +1,4 @@
-# Yle-corpus
+# Yle corpus
 
 Tools for working with the Yle corpus
 
@@ -75,7 +75,7 @@ cat filtered/fi/201[6-8]/*/*.json | egrep -A 3 '"topics"' \
 
 (Gives 10K+ for all 10 selected subjects for 2011-2015, 2K+ for all 2016-)
 
-# Prepare data for seleced subjects
+# Prepare data for selected subjects
 
 Split by subject
 
