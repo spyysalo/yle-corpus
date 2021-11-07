@@ -58,7 +58,6 @@ def normalize_paragraph_space(text):
 
 def normalize_space(text):
     paragraphs = re.split(r'\n(\s+\n|\n)+', text)
-    #paragraphs = [' '.join(p.split()) for p in paragraphs]
     paragraphs = [normalize_paragraph_space(p) for p in paragraphs]
     paragraphs = [p for p in paragraphs if p]
     return '\n\n'.join(paragraphs)
@@ -135,8 +134,6 @@ def convert_document(document, args):
 
 
 def convert_yle_json(fn, data, args):
-    assert set(data.keys()) == { 'data', 'meta', 'notifications' }
-
     for document in data['data']:
         id_ = document['id']
         url = document['url']['full']
